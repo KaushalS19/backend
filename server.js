@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
@@ -27,9 +26,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.post("/forms", (req, res) => {
-  // Handle form creation, insert into the database
   const { fields } = req.body;
-  // Assuming your database has a table named 'forms' with columns 'id' and 'fields'
   db.query(
     "INSERT INTO forms (fields) VALUES (?)",
     [JSON.stringify(fields)],
@@ -45,9 +42,7 @@ app.post("/forms", (req, res) => {
 });
 
 app.get("/forms/:id/details", (req, res) => {
-  // Fetch form details by form ID
   const formId = req.params.id;
-  // Assuming your database has a table named 'forms' with columns 'id' and 'fields'
   db.query("SELECT fields FROM forms WHERE id = ?", [formId], (err, result) => {
     if (err) {
       console.error("Error fetching form details:", err);
@@ -64,9 +59,7 @@ app.get("/forms/:id/details", (req, res) => {
 });
 
 app.post("/form-responses", (req, res) => {
-  // Handle form responses, insert into the database
   const { formId, userId, responses } = req.body;
-  // Assuming your database has a table named 'responses' with columns 'form_id', 'user_id', and 'responses'
   db.query(
     "INSERT INTO responses (form_id, user_id, responses) VALUES (?, ?, ?)",
     [formId, userId, JSON.stringify(responses)],
@@ -82,9 +75,7 @@ app.post("/form-responses", (req, res) => {
 });
 
 app.get("/forms/:id/responses", (req, res) => {
-  // Fetch form responses by form ID
   const formId = req.params.id;
-  // Assuming your database has a table named 'responses' with columns 'form_id', 'user_id', and 'responses'
   db.query(
     "SELECT user_id, responses FROM responses WHERE form_id = ?",
     [formId],
@@ -99,7 +90,6 @@ app.get("/forms/:id/responses", (req, res) => {
   );
 });
 
-// Server listening
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

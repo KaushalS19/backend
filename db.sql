@@ -1,4 +1,3 @@
--- db.sql
 CREATE TABLE forms (
   id INT AUTO_INCREMENT PRIMARY KEY,
   fields JSON NOT NULL

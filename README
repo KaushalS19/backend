@@ -1,0 +1,5 @@
+// migration 
+mysql -u your_username -p your_database < db.sql
+
+// Seeder
+mysql -u your_username -p your_database < seed.sql
